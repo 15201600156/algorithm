@@ -10,9 +10,13 @@ public class BinarySearch {
         int[] a = {1, 2, 3, 5, 6, 12, 24,21};
         int target = 6;
         System.out.println(binarySearchBasic(a, target));
+        System.out.println(binarySearchAlternative(a, target));
+
     }
 
     /**
+     * 二分查找基础版
+     *
      * @param a      待查找的升序数组
      * @param target 待查找的目标值
      * @return 找到则返回索引，找不到返回-1
@@ -26,6 +30,28 @@ public class BinarySearch {
             } else if (a[m] < target) { //目标在右边
                 i = m + 1;
             } else {                    //找到了
+                return m;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * 二分查找改动版
+     *
+     * @param a      待查找的升序数组
+     * @param target 待查找的目标值
+     * @return 找到则返回索引，找不到返回-1
+     */
+    public static int binarySearchAlternative(int[] a, int target) {
+        int i = 0, j = a.length;  //改动第一处
+        while (i <j) {               //改动第二处
+            int m = (i + j) >>> 1;
+            if (target < a[m]) {
+                j = m;          //改动第三处
+            } else if (a[m] < target) {
+                i = m + 1;
+            } else {
                 return m;
             }
         }
