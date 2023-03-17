@@ -2,15 +2,26 @@ package com.zyf.algorithm;
 
 /**
  * 二分查找法
+ * <p>
+ * <p>
+ * 二分查找性能：
+ * 时间复杂度
+ * 最坏情况：O（logn）
+ * 最好情况：如果待查找元素恰好在数组中央，只需要循环一次O（1）
+ * 空间复杂度
+ * 需要常数个指针i,j,m，因此额外占用的空间是O（1）
  */
 public class BinarySearch {
 
 
     public static void main(String[] args) {
-        int[] a = {1, 2, 3, 5, 6, 12, 24,21};
+        int[] a = {1, 2, 3, 5, 6, 12, 24, 21};
         int target = 6;
         System.out.println(binarySearchBasic(a, target));
         System.out.println(binarySearchAlternative(a, target));
+
+        System.out.println(binarySearchBalance(a, target));
+
 
     }
 
@@ -45,7 +56,7 @@ public class BinarySearch {
      */
     public static int binarySearchAlternative(int[] a, int target) {
         int i = 0, j = a.length;  //改动第一处
-        while (i <j) {               //改动第二处
+        while (i < j) {               //改动第二处
             int m = (i + j) >>> 1;
             if (target < a[m]) {
                 j = m;          //改动第三处
@@ -56,5 +67,27 @@ public class BinarySearch {
             }
         }
         return -1;
+    }
+
+
+    /**
+     * 二分查找平衡版
+     */
+
+    public static int binarySearchBalance(int[] a, int target) {
+        int i = 0, j = a.length;
+        while (1 < j-i) {
+            int m = (i + j) >>> 1;
+            if (target < a[m]) {
+                j = m;
+            } else {
+                i = m;
+            }
+        }
+        if (a[i] == target) {
+            return i;
+        } else {
+            return -1;
+        }
     }
 }
